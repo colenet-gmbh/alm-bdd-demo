@@ -1,0 +1,752 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>BDD</title>
+
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/black.css">
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css">
+    <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
+    <style>
+        :root {
+            --r-main-font: 'Nunito';
+            font-size: 22px;
+            --r-heading-font: 'Nunito';
+            --custom-color-red: #ff6666;
+            --custom-color-green: #56fa2d;
+            --custom-color-blue: #3179a0;
+        }
+
+        .flex-center {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
+        #presentation-background img {
+            position: fixed;
+            bottom: 0;
+            padding: 0;
+            margin: 0 !important;
+            height: 30%
+        }
+
+        pre {
+            width: 100% !important;
+        }
+    </style>
+</head>
+<body>
+<div class="reveal">
+    <div id="presentation-background">
+        <img src="assets/skyline_left.svg" style="left: 0">
+        <img src="assets/skyline_right.svg" style="right: 0">
+        <div style="position: fixed; bottom: 0; height: 2.15vh; width: 100%; background-color: var(--custom-color-blue);"></div>
+    </div>
+
+    <div class="slides">
+
+        <!-- ####################### Title ####################### -->
+        <section>
+            <h2 class="r-fit-text">GDD - Gurken Driven Development</h2>
+            <h2 class="r-fit-text">Wie das Gemüse des Jahres 2019 & 2020 die Zusammenarbeit von Entwicklern und QA
+                vereinfacht</h2>
+            <div class="flex-center">
+                <img src="assets/colenet_logo.webp" style="max-width: 120px; object-fit: contain;" alt="">
+                <img src="assets/alm_logo.webp" style="max-width: 120px; object-fit: contain; margin-left: 1em" alt="">
+            </div>
+
+            <aside class="notes">
+                (M) Titel
+                (H) Subtitle
+            </aside>
+        </section>
+
+        <!-- ####################### Speakers ####################### -->
+        <section>
+            <h2>Speakers</h2>
+
+            <div class="flex-center">
+                <div class="fragment fade-right">
+                    <figure>
+                        <img src="assets/henning_meltz.png" width="260">
+                        <figcaption>Henning Meltz<br>Agile Engineer</figcaption>
+                    </figure>
+
+                </div>
+
+                <div class="fragment fade-left">
+                    <figure>
+                        <img src="assets/moritz_kohl.png" width="260">
+                        <figcaption>Moritz Kohl<br>Agile Engineer</figcaption>
+                    </figure>
+                </div>
+            </div>
+
+            <aside class="notes">
+                (M) Henning, 25
+                (H) Moritz, 24
+
+                (H) Wir sind Agile Engineers bei Colenet
+            </aside>
+        </section>
+
+        <!-- ####################### Intro ####################### -->
+        <section>
+            <h2>Kennt ihr das, wenn...</h2>
+
+            <aside class="notes">
+                (M) Kennt ihr das, wenn...
+            </aside>
+        </section>
+
+        <section>
+            <p style="color: var(--custom-color-red)">Ihr kein gemeinsames Verständnis über das Verhalten eurer Software
+                habt?</p>
+
+            <aside class="notes">
+                (H)
+                kein gemeinsames Verständnis über Verhalten eurer Software
+            </aside>
+        </section>
+
+        <section>
+            <p style="color: var(--custom-color-red)">Eure Feedback Loops zu lang sind und somit zu Ineffektivität und
+                doppelter Arbeit führen?</p>
+
+            <aside class="notes">
+                (M) Feedback Loops zu lang
+                → Ineffektivität und
+                → doppelter Arbeit
+            </aside>
+        </section>
+
+        <section>
+            <p style="color: var(--custom-color-red)">Die Abnahme einer Story Ewigkeiten benötigt?</p>
+
+            <aside class="notes">
+                (H) Abnahme einer Story benötigt Ewigkeiten,
+                weil Entwickler und PO sich nicht kein gemeinsames Bild über das Produkt verschaffen können
+            </aside>
+        </section>
+
+        <section>
+            <p style="color: var(--custom-color-red)">Developer keine Ahnung haben, wie sie ein Feature testen
+                sollen?</p>
+
+            <aside class="notes">
+                (M) Developer wissen nicht wie und was Sie testen sollen
+            </aside>
+        </section>
+
+        <!-- ####################### Question ####################### -->
+        <section>
+            <h2>Jetzt seid ihr gefragt!</h2>
+            <p class="fragment fade-up" style="color: var(--custom-color-blue)">Wie löst ihr diese Probleme bei
+                euch?</p>
+
+            <aside class="notes">
+                (M) Anmoderation
+                (M, H) Fragen und Moderation
+            </aside>
+        </section>
+
+        <!-- ####################### Intro to BDD ####################### -->
+        <section>
+            <h3>Was ist BDD?</h3>
+            <p class="fragment fade-up" style="color: var(--custom-color-blue)">"Behavior Driven Development"</p>
+            <p class="fragment fade-up" style="color: var(--custom-color-blue)">Spezifizierung des Verhaltens einer
+                Software in
+                textueller Form</p>
+            <p class="fragment fade-up" style="color: var(--custom-color-blue)">Testing des spezifizierten Verhaltens
+                mit
+                Fallbeispielen</p>
+            <p class="fragment fade-up" style="color: var(--custom-color-blue)">Einbeziehung von Stakeholder in die
+                Anforderungsanalyse</p>
+
+            <aside class="notes">
+                (M)
+                BDD => "Behavior Driven Development"
+
+                1. Schritt: Verhalten verbindlich dokumentieren (textuell!)
+                2. Schritt: Verhalten mit Fallbeispielen testen
+
+                Ermöglicht Einbeziehung von Erwartungen und Anforderungen von Stakeholdern
+                → Stakeholder hat Einfluss auf Verhalten der Software
+            </aside>
+        </section>
+
+        <section>
+            <h3>Wie hilft uns BDD agiler zu werden?</h3>
+            <p class="fragment fade-up" style="color: var(--custom-color-green)">Stärkt Zusammenarbeit innerhalb des
+                Teams und mit den Stakeholdern</p>
+            <p class="fragment fade-up" style="color: var(--custom-color-green)">Stärkt das gemeinsame Verständnis von
+                Software</p>
+            <p class="fragment fade-up" style="color: var(--custom-color-green)">Ermöglicht schnellere Feedback
+                Loops</p>
+
+            <aside class="notes">
+                (H)
+
+                Stärkt Zusammenarbeit
+                → Gemeinsames Verständnis
+                → Schnelleres Feedback, da direkte Kommunikation
+            </aside>
+        </section>
+
+        <section>
+            <h3>Wie funktioniert BDD?</h3>
+            <img class="fragment fade-up" src="assets/bdd_flow.png">
+
+            <aside class="notes">
+                (M)
+
+                1. BDD ist eine Weiterentwicklung von TDD
+                2. Zwei Zyklen. BDD & TDD Cycle.
+                3. BDD lässt sich runterbrechen auf "Discover, Formulate, Automate"
+                4. Erklären welche Schritte PO & Dev zusammen durchführen
+            </aside>
+        </section>
+
+        <!-- ####################### Gherkin how to ####################### -->
+        <section>
+            <h3>Wie kann man BDD implementieren?</h3>
+
+            <div style="display: inline-block; vertical-align: top" class="fade-up">
+                <img class="fragment fade-right" style="height: 15%; width: 15%" src="assets/literally_a_cucumber.png">
+                <img class="fragment fade-left" style="height: 10%; width: 10%" src="assets/cucumber_logo.png">
+            </div>
+
+            <h4 class="fragment fade-up" style="color: var(--custom-color-green)">Cucumber</h4>
+
+            <aside class="notes">
+                (H) Das wohl bekannteste Tool wort wörtlich "Gurke" → Cucumber mit seinen feature files "Gürkchen"
+            </aside>
+        </section>
+
+        <section>
+            <h3>Feature Files</h3>
+
+            <pre>
+                <code data-line-numbers="|1|3-4|5-6|7-8|9-10">Feature: Rescue operation
+
+    # Ein Szenario beschreibt ein Verhalten
+    Scenario: Firefighters saves a kitten
+        # Setzt eine Situation oder einen State voraus
+        Given A kitten has been stuck on a tree
+        # Spezifiziert eine Aktion
+        When The firefighters rescue the kitten
+        # Erwartet ein Resultat
+        Then State of kitten is "rescued"</code>
+            </pre>
+
+            <aside class="notes">
+                (H) Beispiel eines features files
+
+                - Feature: NAME des Features, Platz darunter für nähere Beschreibung
+                - Scenario => Verhalten
+                - Given => Voraussetzung
+                - WHEN => Aktion
+                - THEN => Resultat/Ergebnis
+            </aside>
+        </section>
+
+        <section>
+            <h3>Software Tests</h3>
+            <img src="assets/cucumber_tests.png">
+
+            <aside class="notes">
+                (H)
+
+                Integrieren und somit Nutzen, lässt sich Cucumber mit einer Reihe an Sprachen und Frameworks.
+                Wie solche automatisierten Test aussehen sehen wir später in einer Demo.
+            </aside>
+        </section>
+
+        <!-- ####################### BDD Best Practices ####################### -->
+        <section>
+            <h2>BDD Best-Practices</h2>
+            <p>In der Arbeitsweise mit BDD</p>
+            <p class="fragment fade-up" style="color: var(--custom-color-green)">Im Team das Verhalten der Software
+                definieren</p>
+            <p class="fragment fade-up" style="color: var(--custom-color-green)">TDD leben</p>
+            <p class="fragment fade-up" style="color: var(--custom-color-green)">CI Pipeline für Automatisierung</p>
+
+            <aside class="notes">
+                (H)
+
+                In einer idealen Umsetzung
+                → Wird der Verhalten im Team zusammen definiert
+                → Ist die Entwicklung test driven, sprich die Tests werden vor der Implementierung definiert
+                → Werden die Tests schnell und automatisiert in der Pipeline ausgeführt, eine veröffentlichung erfolgt,
+                nur wenn alle Testfälle bestanden.
+            </aside>
+        </section>
+
+        <!-- ####################### BDD Anti-Patterns ####################### -->
+        <section>
+            <h2>BDD Anti-Patterns</h2>
+            <p>In der Arbeitsweise mit BDD</p>
+            <p class="fragment fade-up" style="color: var(--custom-color-red)">Verhalten wird definiert, nachdem Code
+                implementiert wurde</p>
+            <p class="fragment fade-up" style="color: var(--custom-color-red)">Product Owner schreibt Szenarien im
+                Alleingang</p>
+            <p class="fragment fade-up" style="color: var(--custom-color-red)">Szenarien enthalten zu viele
+                Informationen</p>
+
+            <aside class="notes">
+                (H)
+
+                - Verhalten wird nachträglich dokumentiert → Annahmen bei der Implementierung sind nicht
+                nachvollziehbar; Wissen liegt bei einer Person
+                - Der PO zieht das Dev Team für die Definition der Szenarien nicht hinzu → Oft muss nachgehakt;
+                Randfälle etc.
+            </aside>
+        </section>
+
+        <!-- ####################### Gherkin Best Practices ####################### -->
+        <section>
+            <h1>Gherkin Best-Practices</h1>
+
+            <aside class="notes">
+                (M)
+
+                1. Gherkin ist eine Feature-Definition Language
+                2. Grammatikalische Regeln die ein Feature für Cucumber definieren.
+                3. In der Arbeit mit Gherkin kann man viel falsch machen.
+                4. In dieser Sektion wollen wir Hilfestellungen geben.
+            </aside>
+        </section>
+
+        <section>
+            <h3>Gherkin Best-Practice #1 - Die goldene Regel</h3>
+            <p class="fragment fade-up" style="color: var(--custom-color-green)">Lesbarkeit und Verständnis steht über
+                Allem</p>
+            <pre class="fragment fade-up gherkin">
+                <code>Feature: Fire department
+
+  Scenario: Forest fire
+    Given A forest has caught fire
+    When The wildfire is detected
+    And The fire department extinguishes the wildfire
+    Then State of the forest fire is "extinguished"</code>
+            </pre>
+
+            <aside class="notes">
+                (M)
+
+                1. Lesbarkeit ist in Gherkin genauso wichtig wie bei Code.
+                2. Damit Code gelesen und angepasst werden kann er verständlich sein.
+                3. ... Beispiel erläutern
+                4. Goldene Regel, weil die Hilfestellung von BDD ohne Lesbarkeit dem Team keinen Vorteil bringt.
+                5. Eher Nachteil. Teams können kein gutes Verhalten entwickeln und sind verwirrt.
+            </aside>
+        </section>
+
+        <section>
+            <h3>Gherkin Best-Practice #2 - One-to-one Regel</h3>
+            <p class="fragment fade-up" style="color: var(--custom-color-green)">Jedes Szenario beschreibt genau ein
+                Verhalten</p>
+            <p class="fragment fade-up" style="color: var(--custom-color-green); font-size: 0.6em">1 Verhalten -> 1
+                Beispiel -> 1 Szenario -> 1 Test -> 1 Resultat</p>
+            <pre class="fragment fade-up gherkin">
+                <code>Feature: Fire department
+
+  Scenario: Emergency call
+    Given An emergency
+    When Emergency call received by emergency hotline
+    Then Fire departments state is "alert"
+
+  Scenario: Fire fighting
+    Given A car caught fire
+    When Fire truck extinguishes burning car
+    Then State of the car is "extinguished"</code>
+            </pre>
+
+            <aside class="notes">
+                (M)
+
+                1. One-to-one: Jedes Szenario beschreibt genau ein Verhalten.
+                2. Ein Verhalten produziert ein messbares Resultat
+                3. ... Beispiele erläutern
+            </aside>
+        </section>
+
+        <section>
+            <h2>Vorteile der One-To-One Regel...</h2>
+        </section>
+
+        <section>
+            <p style="color: var(--custom-color-green)">Jeder Testfehler
+                zeigt auf ein einzigartiges Problem</p>
+        </section>
+
+        <section>
+            <p style="color: var(--custom-color-green)">Weniger komplexe
+                Arbeit ermöglicht schnellere Feedback Loops</p>
+        </section>
+
+        <section>
+            <p style="color: var(--custom-color-green)">Erhöht die Lesbarkeit.</p>
+        </section>
+
+        <section>
+            <h3>Gherkin Best-Practice #3 - Grammatik</h3>
+            <p class="fragment fade-up" style="color: var(--custom-color-green)">Verwenden der korrekten Grammatik hilft
+                dabei das Verständnis zu erhöhen</p>
+            <pre class="fragment fade-up gherkin">
+                <code>Feature: Fire department
+
+  Scenario: Fire fighting
+    # Vermeidung der Vermischung von verschiedenen Erzählformen
+    # (entweder Erste oder Dritte Person)
+    # Given -> Past or present-perfect tense
+    Given A car that has caught fire
+    # When -> Present tense
+    When Fire truck extinguishes burning car
+    # Then -> Present or future tense
+    Then State of the car is "extinguished"</code>
+            </pre>
+
+            <aside class="notes">
+                (M)
+
+                1. Die richtige Grammatik hilft die Lesbarkeit zu steigern und zahlt auf die goldene Regel ein.
+                2. Keep it simple! Versuchen im Present / Präsens zu bleiben.
+                3. ... Beispiele erläutern
+                4. Was wäre wenn perfect tense, future tense etc.
+            </aside>
+        </section>
+
+        <!-- ####################### Gherkin Anti-Patterns ####################### -->
+        <section>
+            <h1>Gherkin Anti-Patterns</h1>
+
+            <aside class="notes">
+                (M)
+
+                1. Genauso wie Best Practices gibt es Anti-Patterns für Gherkin.
+                2. Davon wollen wir euch auch ein paar vorstellen.
+            </aside>
+        </section>
+
+        <section>
+            <h3>Gherkin Anti-Pattern #1</h3>
+            <p class="fragment fade-up" style="color: var(--custom-color-red)">Verschachtelte When-Then-When-Then
+                Szenarien</p>
+            <pre class="fragment fade-up gherkin">
+                <code>Feature: Fire department
+
+  Scenario: Fire fighting
+    Given A car that has caught fire
+    When Emergency call received
+    Then Department receives alarm
+    When fire truck leaves fire department
+    Then fire truck arrives at the place of the accident
+    When fire truck extinguishes the burning car
+    Then State of the car is "extinguished"</code>
+            </pre>
+
+            <aside class="notes">
+                (M)
+
+                1. ... Beispiele erläutern
+                2. Verstößt gegen die One-to-one Regel.
+                3. Reduziert die Lesbarkeit und verstößt gegen die goldene Regel.
+                4. Erhöht die Komplexität des Softwaretests durch viele Bedingungen und Assertions.
+            </aside>
+        </section>
+
+        <section>
+            <h3>Gherkin Anti-Pattern #2</h3>
+            <p class="fragment fade-up" style="color: var(--custom-color-red)">Beschreibung der Aktionen anstatt
+                Beschreibung des Verhaltens</p>
+            <pre class="fragment fade-up gherkin">
+                <code>Feature: Fire department
+
+  Scenario: Rescue operation
+    Given A man is trapped in his car after an accident
+    When 3 Fire trucks with 4 firefighters each arrive
+      And Firefighters secure the place of the accident
+      And Firefighters ...
+      And ...
+      ...
+    Then State of the accident participant is "rescued"</code>
+            </pre>
+
+            <aside class="notes">
+                (M)
+
+                1. ... Beispiele erläutern
+                2. Aktionen beinhalten Details; Implementierung der Software wird fest definiert.
+                3. BDD spezifiziert das Verhalten, um die Implementierung offenzulassen.
+                3. Das Feature File muss in Zukunft geändert werden.
+                4. Feature Files sollten nur geändert werden wenn sich das Verhalten ändert.
+            </aside>
+        </section>
+
+
+        <!-- ####################### Kotlin DEMO ####################### -->
+        <section>
+            <h2>Demo</h2>
+
+            <p>Römische Ziffer (<span style="color: var(--custom-color-red)">IV</span>) -> Dezimalzahl (<span
+                    style="color: var(--custom-color-red)">4</span>)</p>
+
+
+            <p class="fragment fade-up">Dezimalzahl (<span
+                    style="color: var(--custom-color-red)">4</span>) -> Römische Ziffer (<span
+                    style="color: var(--custom-color-red)">IV</span>)</p>
+
+
+            <aside class="notes">
+                (H) Zunächst römische Ziffer zu Dezimalzahl
+
+                Später in einer Livedemo Implementierung von römischer Ziffer zu Dezimalzahl
+            </aside>
+        </section>
+
+        <section>
+            <h3 class="fade-out">Erstes Featurefile</h3>
+
+
+            <pre class="gherkin"><code>Feature: Roman Numerals
+
+  Converts roman numerals to decimal numbers
+
+  Scenario:
+    Given The roman numeral "II"
+    When Converted to decimal number
+    Then The output should equal 2
+                </code></pre>
+
+
+            <aside class="notes">
+                (H)
+
+                SELBSTERKLÄREND
+            </aside>
+        </section>
+
+        <section>
+            <h3>Tests</h3>
+
+
+            <pre class="kotlin"><code data-line-numbers="|1-4|6-9|11-16" data-ln-start-from="9">    @Given("The roman numeral {string}")
+    fun `Given the roman numeral`(roman: String) {
+        romanNumber = roman
+    }
+
+    @When("Converted to decimal number")
+    fun `When converted to decimal number`() {
+        decimalNumber = numeralsConverter.convert(romanNumber)
+    }
+
+    @Then("The output should equal {int}")
+    fun `Then the output should equal`(exp: Int) {
+        assertNotNull(decimalNumber)
+        assertEquals(exp, decimalNumber)
+    }
+</code></pre>
+
+
+            <aside class="notes">
+                (H)
+
+                Implementierung der Tests kommt zuerst, nach Prinzip TDD.
+                - gegeben String, class field wird gesetzt
+                - converter interface wird definiert; methodenaufruf; rückgabewert als class field
+                - test ob vorheriger rückgabewert dem erwarteten wert entspricht
+            </aside>
+        </section>
+
+        <section>
+            <h3>Implementierung</h3>
+            <pre class="kotlin"><code data-line-numbers="3-5,7" data-ln-start-from="6">class NumeralsConverter {
+
+    private val romansToDecimals = mapOf(
+        "II" to 2
+    )
+
+    fun convert(romanNumeral: String): Int? = romansToDecimals[romanNumeral]
+}
+                </code></pre>
+
+            <aside class="notes">
+                (H) Sehr heruntergebrochene implementierung um tests grün zu bekommen → Scenario erfüllen
+            </aside>
+        </section>
+
+
+        <section>
+            <h3>Testausgabe</h3>
+            <pre><code>cucumber.plugin=pretty, html:build/cucumber-reports/Cucumber.html</code></pre>
+
+            <iframe class="fragment fade-up" src="assets/Cucumber.html"
+                    style="width: 100%; height: 50vh; border: none"></iframe>
+
+            <aside class="notes">
+                (H) Möglichkeiten der Ausgabe; HTML, JSON, XML (wie Junit-xml)
+
+                Hier schöne HTML Seite des Ergebnisses
+            </aside>
+        </section>
+
+        <!-- ####################### Jira DEMO ####################### -->
+        <section>
+            <h3>Lebende Cucumber Dokumentation</h3>
+
+            <figure class="fragment fade-up">
+                <img src="assets/Jira_Cucumber.png" alt="Jira Plugin Cucumber for Jira">
+                <figcaption>Jira Plugin "Cucumber for Jira"</figcaption>
+            </figure>
+
+            <aside class="notes">
+                (H) Jetzt kommt der, für uns Entwickler wohl interessante Teil.
+                Wir möchten mithilfe des Jira Plugins ein neues Feature ermöglichen.
+
+                Teil der Einrichtung ist die Git Pipeline, wir erinnern uns (Automatisiert und nachvollziehbar).
+                Dazu wird Moritz euch unsere Github Pipeline näherbringen, um zu zeigen, wie die Integration bei uns erfolgt ist.
+            </aside>
+        </section>
+
+        <section>
+            <h3>CI Pipeline</h3>
+            <pre class="fragment visible current-fragment yaml">
+            <code
+                    data-line-numbers="|3|15-17|18-25"
+                    data-ln-start-from="1">name: Cucumber Test
+
+on: [push, pull_request]
+
+jobs:
+  bdd_test:
+    runs-on: ubuntu-latest
+    name: BDD Test
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-java@v3
+      with:
+        java-version: 8
+        distribution: zulu
+    - name: Run Cucumber tests
+      run: |
+        ./gradlew test
+    - name: Upload Cucumber test results
+      if: always()
+      run: |
+        curl -X POST https://c4j.cucumber.io/ci/rest/api/results \
+          -H 'authorization: Bearer ${{ secrets.CUCUMBER_FOR_JIRA_CREDS }}' \
+          -H 'content-type: multipart/form-data' \
+          -F 'results_files[]'=@build/cucumber-reports/Cucumber.json \
+          -F language=jvm</code>
+            </pre>
+
+            <aside class="notes">
+                (M)
+
+                1. GitHub Actions Pipeline
+                2. Läuft auf Pull-Requests und bei jedem Push auf einen Branch
+                3. Tests laufen lassen
+                4. Tests hochladen
+            </aside>
+        </section>
+
+        <section>
+            <h1>LIVE DEMO</h1>
+
+            <aside class="notes">
+                Kurze Übersicht:
+                - Was Bring das Plugin mit
+                - Lebende Dokumentation
+                - Feature Issues
+
+                Erweiterung der Examples:
+                - Dezimal -> Römische Ziffer
+                - Neues Feature Issue wird erstellt
+                - Feature File wird erstellt
+                - Feature wird ins Repo gepusht
+                - Tests sind nun zu sehen und fehlgeschlagen, da nicht vorhanden
+                - Implementierung der Tests
+                - Implementierung der Funktionalität
+                - Push
+                - Ticket Lösen
+            </aside>
+        </section>
+
+        <!-- ####################### Fragen ####################### -->
+        <section>
+            Etwas unklar?
+
+            <aside class="notes">
+                (H, M) Moderation
+            </aside>
+        </section>
+
+        <!-- ####################### TIL / Feedback ####################### -->
+        <section>
+            Today I learned
+
+            <aside class="notes">
+                (H, M) Moderation
+            </aside>
+        </section>
+
+        <!-- ####################### END ####################### -->
+        <section>
+            <h1>Vielen Dank!</h1>
+            <div class="flex-center">
+                <img src="assets/colenet_logo.webp" style="max-width: 120px;object-fit: contain;" alt="">
+                <img src="assets/alm_logo.webp" style="margin-left: 1em" width="120" alt="">
+            </div>
+
+            <aside class="notes">
+                (H, M) Cooler Abschied (?lol what wie?)
+            </aside>
+        </section>
+
+
+    </div>
+</div>
+
+<script src="dist/reveal.js"></script>
+<script src="plugin/notes/notes.js"></script>
+<script src="plugin/markdown/markdown.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script src="plugin/math/math.js"></script>
+<script>
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+
+    Reveal.initialize({
+        // The "normal" size of the presentation, aspect ratio will
+        // be preserved when the presentation is scaled to fit different
+        // resolutions. Can be specified using percentage units.
+        width: '60%',
+        height: 700,
+
+        // Factor of the display size that should remain empty around
+        // the content
+        margin: 0.04,
+
+        // Bounds for smallest/largest possible scale to apply to content
+        minScale: 0.2,
+        maxScale: 2.0,
+
+        hash: true,
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMath]
+    });
+</script>
+
+
+</body>
+</html>

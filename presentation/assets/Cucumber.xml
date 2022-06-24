@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<testsuite errors="0" failures="0" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="5" time="0.253">
+    <testcase classname="Roman Numerals" name="_2" time="0.039">
+        <system-out>
+            <![CDATA[Given The roman numeral "II"................................................passed
+When Converted to decimal number............................................passed
+Then The output should equal 2..............................................passed
+]]>
+        </system-out>
+    </testcase>
+    <testcase classname="Roman Numerals" name="converting" time="0.002">
+        <system-out>
+            <![CDATA[Given The roman numeral "I".................................................passed
+When Converted to decimal number............................................passed
+Then The output should equal 1..............................................passed
+]]>
+        </system-out>
+    </testcase>
+    <testcase classname="Roman Numerals" name="converting_2" time="0.001">
+        <system-out>
+            <![CDATA[Given The roman numeral "IV"................................................passed
+When Converted to decimal number............................................passed
+Then The output should equal 4..............................................passed
+]]>
+        </system-out>
+    </testcase>
+    <testcase classname="Roman Numerals" name="converting_3" time="0.001">
+        <system-out>
+            <![CDATA[Given The roman numeral "V".................................................passed
+When Converted to decimal number............................................passed
+Then The output should equal 5..............................................passed
+]]>
+        </system-out>
+    </testcase>
+    <testcase classname="Roman Numerals" name="converting_4" time="0.002">
+        <system-out>
+            <![CDATA[Given The roman numeral "X".................................................passed
+When Converted to decimal number............................................passed
+Then The output should equal 10.............................................passed
+]]>
+        </system-out>
+    </testcase>
+</testsuite>
