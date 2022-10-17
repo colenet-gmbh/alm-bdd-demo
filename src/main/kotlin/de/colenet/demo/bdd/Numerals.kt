@@ -1,6 +1,8 @@
+package de.colenet.demo.bdd
+
 class NumeralsConverter {
 
-    private val romansToDecimals: Map<String, Int> = mapOf(
+    private val romansToDecimals = mapOf(
         "I" to 1,
         "II" to 2,
         "III" to 3,
@@ -9,7 +11,5 @@ class NumeralsConverter {
         "X" to 10
     )
 
-    fun convert(romanNumeral: String): Int? {
-        return romansToDecimals[romanNumeral]
-    }
+    fun convert(romanNumeral: String): Int? = romansToDecimals[romanNumeral]
 }

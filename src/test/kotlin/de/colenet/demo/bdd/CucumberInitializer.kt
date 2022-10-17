@@ -10,4 +10,4 @@ import org.junit.platform.suite.api.Suite
 @IncludeEngines("cucumber")
 @SelectClasspathResource("steps")
 @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "de.colenet.demo.bdd")
-internal class CucumberInitializer
+class CucumberInitializer

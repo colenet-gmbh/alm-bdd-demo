@@ -1,14 +1,14 @@
-Feature: Roman Numerals
+Feature: Roman Numerals to decimal
 
   Converts roman numerals to decimal numbers
 
-  Scenario:
+  Scenario: Converting "II" into 2
     Given The roman numeral "II"
     When Converted to decimal number
     Then The output should equal 2
 
   @converting
-  Scenario Outline: converting
+  Scenario Outline: Converting multiple roman numerals into decimal
       Given The roman numeral <roman>
       When Converted to decimal number
       Then The output should equal <decimal>
