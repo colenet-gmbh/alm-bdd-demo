@@ -1,0 +1,25 @@
+name: Cucumber Test
+
+on: [push, pull_request]
+
+jobs:
+  bdd_test:
+    runs-on: ubuntu-latest
+    name: BDD Test
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          java-version: 8
+          distribution: zulu
+      - name: Run Cucumber tests
+        run: | 
+          ./gradlew test
+      - name: Upload Cucumber test results
+        if: always()
+        run: |
+          curl -X POST https://c4j.cucumber.io/ci/rest/api/results \
+            -H 'authorization: Bearer ${{ secrets.CUCUMBER_FOR_JIRA_CREDS }}' \
+            -H 'content-type: multipart/form-data' \
+            -F 'results_files[]'=@build/cucumber-reports/Cucumber.json \
+            -F language=jvm
